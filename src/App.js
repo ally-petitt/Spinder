@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import querystring from "querystring";
 
 function App() {
+  const handleLogin = async () => {
+    let res = await fetch(
+      "https://accounts.spotify.com/authorize?" +
+        querystring.stringify({
+          response_type: "code",
+          client_id: process.env.REACT_APP_CLIENT_ID,
+          redirect_uri: "http://localhost:3000/success",
+        })
+    );
+
+    console.log(res);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      login
+      <br />
+      id: {process.env.REACT_APP_CLIENT_ID}
+      <br />
+      <button onClick={handleLogin}>Click to login</button>
     </div>
   );
 }
